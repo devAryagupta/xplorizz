@@ -1,0 +1,51 @@
+:root {
+  --primary-color: #e63946;  /* Bold red accent */
+  --secondary-color: #d62828;
+  --accent-color: #4b0082;   /* Deep indigo */
+  --bg-light: #f8f8f8;
+  --text-color: #333;
+  --transition-speed: 0.3s;
+}
+
+/* Main container */
+.blog-features-container {
+  padding: 40px 20px;
+  margin: 40px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Title styling */
+.features-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+}
+
+/* Grid layout for features */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Card styling for each feature */
+.feature-card {
+  background: var(--bg-light);
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 5px;
+}

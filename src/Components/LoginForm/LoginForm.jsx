@@ -1,60 +1,86 @@
-import React, { useState } from "react";
-import axios from "axios"; 
-import './LoginForm.css'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";       
+import './LoginForm.css';
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import logo from "../Assets/LOGO Xplorizz (1).png";
-const LoginForm = () =>{
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+import { AuthContext } from "../../Context/AuthContext";
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:5000/login", {
-                username,
-                password,
-            });
-            if (response.data.token) {
-                // Assuming you're redirecting to a homepage in the future
-                window.location.href = "/homepage";
-            }
-        } catch (err) {
-            setError("Invalid username or password");
-        }
+const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.classList.add('login-page');
+    return () => {
+      document.body.classList.remove('login-page');
     };
-    return(
-        <div className="wrapper">
-            <form action="">
-            <div className="logo-container">
-                    <img src={logo} alt="Logo" className="logo" />
-                    <h1>Login</h1>
-            </div>      
-            <div className="inputbox">
-                <input type="text" placeholder="Username"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)} required></input>
-                <FaUserAlt className="icon" />
-            </div>
-            <div className="inputbox">
-                <input type="password" placeholder="Password"                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} required></input>
-                <RiLockPasswordFill className="icon" />
+  }, []);
 
-            </div>
-             {error && <p className="error">{error}</p>}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
 
-            <div className="remember-forgot">
-                <label><input type="checkbox"></input>Remember me</label>
-                <a href ="#">Forgot Password?</a>
-            </div>
-            <button type="submit">Login</button>
-            <div className="register-link">
-                <p>Don't have an account?<a href="#">Register</a></p>
-            </div>
-            </form>
+        
+      if (response.data.token) {
+        // Assuming you're redirecting to a homepage in the future
+        login(response.data.token);
+        navigate("/homepage"); 
+      }
+    } catch (err) {
+      setError("Invalid username or password");
+    }
+  };
+
+  return (
+    <div className="wrapper">
+      <form onSubmit={handleSubmit}>
+        <div className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+          <h1>Login</h1>
         </div>
-    );
+        <div className="inputbox">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <FaUserAlt className="icon" />
+        </div>
+        <div className="inputbox">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <RiLockPasswordFill className="icon" />
+        </div>
+        {error && <p className="error">{error}</p>}
+        <div className="remember-forgot">
+          <label>
+            <input type="checkbox" /> Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit">Login</button>
+        <div className="register-link">
+          <p>
+            Don't have an account? <a href="#">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  );
 };
+
 export default LoginForm;

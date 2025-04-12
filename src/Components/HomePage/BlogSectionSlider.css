@@ -1,0 +1,128 @@
+.blog-slider-container {
+    margin-top: 2rem;
+    font-family: 'Rokkitt', serif;
+    color: #6c63ff;
+    
+    padding: 0;
+  }
+  
+  .blog-slide {
+    position: relative;
+    height: 320px; /* Set a fixed height for all slides */
+    overflow: hidden;
+    display: flex;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.5s ease;
+  }
+  .featured-image-wrapper {
+    width: 60%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .featured-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Overlay for fade effect on image */
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(75, 0, 130, 0.65), transparent);
+    opacity: 0.65;
+    transition: opacity 0.5s ease;
+  }
+  
+  .blog-slide:hover .slide-overlay {
+    opacity: 0.85;
+  }
+  
+  .slide-content {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 1.5rem;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .read-more {
+    text-decoration: none;
+    background-color: #4b0082; /* Indigo tone */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+  }
+  .read-more:hover {
+    background-color: #3a0068;
+  }
+  
+  @media (max-width: 768px) {
+    .slide-content {
+      padding: 1rem;
+    }
+  }
+  .featured-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+  
+  .featured-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .swiper-button-next,
+.swiper-button-prev {
+  color: #4b0082; /* Indigo tone for arrow icon */
+  width: 3rem;
+  height: 3rem;
+  margin-top: -1.5rem; /* Center vertically */
+  border: 2px solid #4b0082;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #4b0082;
+  color: #fff;
+  border-color: #4b0082;
+}
+
+/* Adjust arrow icon if needed */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Swiper Pagination Bullets */
+.swiper-pagination-bullet {
+
+  background-color: aliceblue;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color:rgb(0, 73, 137);
+}

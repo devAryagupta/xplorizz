@@ -22,8 +22,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('./Components/Assets/toomas-tartes-Yizrl9N_eDA-unsplash.jpg')
-  no-repeat;
+
   background-size: cover;
   background-position: center;
 
