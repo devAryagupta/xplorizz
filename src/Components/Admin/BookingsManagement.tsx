@@ -25,9 +25,8 @@ const BookingsManagement: React.FC = () => {
       }
       setLoading(true);
       try {
-        // call your admin‐only endpoint
         const res = await axios.get<Booking[]>(
-          "http://localhost:5000/api/admin/bookings",
+          "http://localhost:5000/api/bookings/all",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setBookings(res.data);

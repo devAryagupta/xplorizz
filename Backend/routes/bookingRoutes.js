@@ -3,6 +3,7 @@ import Booking from "../models/Booking.js";
 import User from "../models/User.js";
 import Guide from "../models/Guide.js";
 import auth from "../middleware/auth.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const router = express.Router();
 
@@ -50,6 +51,18 @@ router.post("/", auth, async (req, res) => {
 router.get("/guide", auth, async (req, res) => {
   try {
     const bookings = await Booking.find({ guide: req.user.userId })
+      .populate("user", "username email")
+      .populate("guide", "name");
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/bookings/all — admin: get all bookings
+router.get("/all", adminAuth, async (req, res) => {
+  try {
+    const bookings = await Booking.find()
       .populate("user", "username email")
       .populate("guide", "name");
     res.json(bookings);
