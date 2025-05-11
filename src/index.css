@@ -1,5 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  --primary-color: #0055A5;      /* deep blue */
+  --accent-color: #FFCC00;       /* sunny yellow */
+  --bg-light:    #F0F4F8;       
+  --text-color:  #333333;
+  --radius:      6px;
+  --gap:         1rem;
+}
+
 
 *{
   margin: 0;
@@ -22,12 +31,56 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
+  background: var(--bg-light);
+  color: var(--text-color);
   background-size: cover;
   background-position: center;
+  line-height: 1.5;
 
 
 }
+h1, h2, h3, h4, h5 {
+  margin-top: 0;
+  margin-bottom: var(--gap);
+}
+p {
+  margin-bottom: var(--gap);
+}
+
+/* Buttons */
+button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+button:hover {
+  background: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+/* Inputs & Textareas */
+input, textarea, select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  margin-bottom: var(--gap);
+  font-size: 1rem;
+}
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: var(--gap);
+  margin-bottom: var(--gap);
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

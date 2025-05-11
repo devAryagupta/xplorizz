@@ -1,0 +1,94 @@
+.passport-photo {
+  width: 96px;             /* ~passport width */
+  height: 128px;           /* ~passport height */
+  object-fit: cover;       /* crop to fill */
+  border-radius: 4px;      /* soften corners */
+  background-color: #e2e8f0; /* light gray fallback */
+  flex-shrink: 0;          /* prevent flex from squashing */
+}
+
+.passport-photo.empty {
+  /* if no image yet, show blank box */
+  background: #f0f4f8;
+}
+
+/* tighten up the grid columns a bit */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.guide-filters {
+    margin-bottom: 35px;
+  }
+/* make card auto‐height, flex layout, and a sensible min-height */
+.card {
+  position: relative;
+  color :inherit;
+  text-decoration: none;
+  display: flex;
+  border: 1px solid rgba(3, 213, 245, 0.125);
+  flex-direction: column;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  min-height: 320px;
+  transition: transform .3s;
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* slightly smaller image header */
+.img-bx {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+.img-bx img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* content takes remaining space and pads nicely */
+.content {
+  flex: 1;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* clamp the name/expertise to avoid overflow */
+.content h2 {
+  font-size: 1.2rem;
+  line-height: 1.3rem;
+  max-height: 2.6rem;           /* two lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+.content h2 span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--primary-color, #3182ce);
+  font-weight: 300;
+}
+.content p {
+  font-size: .9rem;
+  color: #333;
+  margin: 0;
+}
+
+/* shrink the button a bit */
+.content .btn {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  margin-top: auto;
+  align-self: stretch;
+}

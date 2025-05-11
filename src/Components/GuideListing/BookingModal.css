@@ -1,0 +1,46 @@
+.booking-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gap);
+    z-index: 50;
+  }
+  
+  .booking-modal-content {
+    background: #fff;
+    border-radius: var(--radius);
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: calc(var(--gap) * 1.5);
+    position: relative;
+  }
+  
+  .booking-modal-content .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .booking-modal-content h3 {
+    margin-top: 0;
+    margin-bottom: var(--gap);
+  }
+  
+  .booking-modal-content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .booking-modal-content textarea {
+    height: 120px;   /* fixed, non-variable height */
+    resize: vertical;
+  }

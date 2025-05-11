@@ -1,0 +1,76 @@
+.bookings-page {
+  padding: 2rem;
+}
+.bookings-page h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.booking-card {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.booking-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.booking-avatar {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 1rem;
+  border: 2px solid #fff;
+}
+
+.booking-info {
+  padding: 1rem;
+  flex: 1;
+}
+.booking-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.booking-info .expertise {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+.booking-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.status {
+  font-weight: bold;
+}
+.status.pending   { color: #d97706; } /* amber-600 */
+.status.accepted  { color: #059669; } /* emerald-600 */
+.status.declined  { color: #b91c1c; } /* red-700 */
+.status.completed { color: #2563eb; } /* blue-600 */
+
+.loading,
+.empty {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  padding: 2rem 0;
+}

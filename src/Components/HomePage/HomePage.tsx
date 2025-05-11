@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import ReactPlayer from "react-player";
 import FeaturedDestinations from "./FeaturedDestinations";
-import SearchFilter from "./SearchFilter";
-import BlogSection from "./BlogSection";
+
+
 import Testimonials from "./Testimonials";
 import "./HomePage.css";
 
-
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -26,17 +25,38 @@ const HomePage = () => {
           <nav>
             <ul className="nav-links">
               <li><a href="#destinations">Destinations</a></li>
-              <li><a href="#experiences">Experiences</a></li>
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li>
+                <Link
+                  to="/experiences"
+                  className="text-gray-800 hover:text-gray-600"
+                >
+                  Experiences
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides" className="text-gray-800 hover:text-gray-600">
+                  Local Guides
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-gray-800 hover:text-gray-600">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link to="/bookings" className="text-gray-800 hover:text-gray-600">
+                  Bookings
+                </Link>
+              </li>
             </ul>
           </nav>
-          <button onClick={handleLogout} className="logout-button">Logout</button>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
         </div>
       </header>
       <main className="main-content">
         <section className="hero-section">
-          {/* Using ReactPlayer as the background video */}
           <ReactPlayer
             className="hero-video"
             url="https://www.youtube.com/watch?v=rTDaZoDDW5g"
@@ -50,7 +70,7 @@ const HomePage = () => {
           <div className="hero-content">
             <h2> Unveiling the Wonders of Incredible Bharat</h2>
             <p>
-            Uncover the enchanting mystique of India, where ancient traditions meet vibrant modernity.
+              Uncover the enchanting mystique of India, where ancient traditions meet vibrant modernity.
             </p>
             <a href="#destinations" className="btn-primary">Explore Now</a>
           </div>
@@ -59,10 +79,8 @@ const HomePage = () => {
           </div>
         </section>
         <FeaturedDestinations />
-        <SearchFilter />
         
-        <Testimonials />  
-
+        <Testimonials />
       </main>
       <footer className="footer">
         <p>&copy; 2025 Xplorizz. All Rights Reserved.</p>

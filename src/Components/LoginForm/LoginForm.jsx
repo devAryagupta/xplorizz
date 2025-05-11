@@ -7,6 +7,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import logo from "../Assets/LOGO Xplorizz (1).png";
 import { AuthContext } from "../../Context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -25,15 +26,16 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
-
-        
-      if (response.data.token) {
-        // Assuming you're redirecting to a homepage in the future
-        login(response.data.token);
-        navigate("/homepage"); 
+      const { data } = await axios.post("http://localhost:5000/api/auth/login", { username, password });
+      const { token } = data;
+      if (token) {
+        login(token);
+        localStorage.setItem("token", token);
+        const { role } = jwtDecode(token);
+        localStorage.setItem("role", role);
+        navigate(role === "admin" ? "/admin" : "/homepage");
       }
-    } catch (err) {
+    } catch {
       setError("Invalid username or password");
     }
   };
