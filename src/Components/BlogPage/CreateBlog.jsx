@@ -14,7 +14,7 @@ const CreateBlog = () => {
     e.preventDefault();
     const tagList = tags.split(',').map(t => t.trim());
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const res = await axios.post("http://localhost:5000/api/blogs", {
         title,
         category,

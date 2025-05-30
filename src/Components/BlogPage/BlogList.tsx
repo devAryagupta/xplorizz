@@ -13,7 +13,10 @@ export interface Blog {
   createdAt: string;
 }
 
-const BlogList: React.FC = () => {
+interface BlogListProps {
+  categoryFilter?: string
+}
+const BlogList: React.FC<BlogListProps> = ({ categoryFilter }) => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,9 +30,15 @@ const BlogList: React.FC = () => {
   if (loading) return <p>Loading blogs…</p>;
   if (blogs.length === 0) return <p>No blogs found.</p>;
 
+  const displayed = categoryFilter
+    ? blogs.filter(b => b.category.toLowerCase() === categoryFilter.toLowerCase())
+    : blogs
+
+  if (displayed.length === 0) return <p>No posts{categoryFilter && ` in “${categoryFilter}`}</p>
+
   return (
     <div className="blog-list grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {blogs.map(b => <BlogCard key={b._id} blog={b} />)}
+      {displayed.map(b => <BlogCard key={b._id} blog={b} />)}
     </div>
   );
 };

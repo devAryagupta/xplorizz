@@ -88,6 +88,7 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
                   {guide.name}
                   <br />
                   <span>{guide.expertise}</span>
+
                 </h2>
                 <p>Languages: {guide.languages.join(", ")}</p>
                 <p>Price: ₹{guide.pricePerHour}/hr</p>

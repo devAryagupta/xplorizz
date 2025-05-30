@@ -25,7 +25,7 @@ const BookingsPage: React.FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         // hit your userRoutes GET /api/users/bookings
         const { data } = await axios.get(
           "http://localhost:5000/api/users/bookings",

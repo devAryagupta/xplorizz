@@ -17,7 +17,7 @@ const BlogManagement: React.FC = () => {
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const res = await axios.get("http://localhost:5000/api/blogs", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -32,7 +32,7 @@ const BlogManagement: React.FC = () => {
   const approveBlog = async (blogId: string) => {
     setApproveLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.put(
         `http://localhost:5000/api/blogs/${blogId}/approve`,
         {},
@@ -62,6 +62,11 @@ const BlogManagement: React.FC = () => {
             <div key={blog._id} className="border p-4 rounded">
               <h3 className="font-semibold">{blog.title}</h3>
               <p>Author: {blog.author}</p>
+              <p>
+                <strong>Content:</strong>
+                <br />
+                <span style={{ whiteSpace: "pre-wrap" }}>{blog.content}</span>
+              </p>
               <p>Status: {blog.approved ? "Approved" : "Pending"}</p>
               {!blog.approved && (
                 <button

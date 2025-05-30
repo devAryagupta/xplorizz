@@ -3,11 +3,11 @@ import axios from "axios";
 
 interface Booking {
   _id: string;
-  user: { name: string; email: string };
+  user: { username: string; email: string };
   guide: { name: string };
   date: string;
   hours: number;
-  contact: string;
+    contact: { phone?: string; email?: string }; 
   status: string;
 }
 
@@ -18,7 +18,7 @@ const BookingsManagement: React.FC = () => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         setError("Admin not authenticated.");
         return;
@@ -60,14 +60,18 @@ const BookingsManagement: React.FC = () => {
         <tbody>
           {bookings.map(b => (
             <tr key={b._id}>
-              <td className="border px-2 py-1">{b.user.name}</td>
+              <td className="border px-2 py-1">{b.user.username}</td>
               <td className="border px-2 py-1">{b.user.email}</td>
               <td className="border px-2 py-1">{b.guide.name}</td>
               <td className="border px-2 py-1">
                 {new Date(b.date).toLocaleDateString()}
               </td>
               <td className="border px-2 py-1">{b.hours}</td>
-              <td className="border px-2 py-1">{b.contact}</td>
+              <td className="border px-2 py-1">
+  {b.contact
+    ? [b.contact.phone, b.contact.email].filter(Boolean).join(" / ")
+    : "-"}
+</td>
               <td className="border px-2 py-1">{b.status}</td>
             </tr>
           ))}

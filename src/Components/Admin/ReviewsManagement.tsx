@@ -15,7 +15,7 @@ const ReviewsManagement: React.FC = () => {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       // Adjust the endpoint as needed for your reviews API
       const res = await axios.get("http://localhost:5000/api/reviews", {
         headers: { Authorization: `Bearer ${token}` },
@@ -30,7 +30,7 @@ const ReviewsManagement: React.FC = () => {
 
   const approveReview = async (reviewId: string) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.put(
         `http://localhost:5000/api/reviews/${reviewId}/approve`,
         {},

@@ -30,7 +30,7 @@ const DestinationForm: React.FC<DestinationFormProps> = ({ destination, onSucces
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (destination) {
         // Update destination
         await axios.put(`http://localhost:5000/api/destinations/${destination._id}`, formData, {

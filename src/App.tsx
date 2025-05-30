@@ -12,12 +12,15 @@ import AdminRoute from "./Utils/AdminRoute";
 import LoginForm from "./Components/LoginForm/LoginForm";
 import ExperiencePage from "./Components/ExperiencePage/ExperiencePage";
 import BookingsPage from "./Pages/BookingsPage";
-
+import RegisterForm from "./Components/RegisterationForm/RegisterForm.jsx";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} /> 
+
+        {/* Public Routes */}
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>

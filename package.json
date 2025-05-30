@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/jwt-decode": "^3.1.0"
+    "@types/jwt-decode": "^3.1.0",
+    "nodemon": "^3.1.10"
   }
 }

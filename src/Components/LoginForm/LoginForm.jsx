@@ -7,13 +7,14 @@ import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import logo from "../Assets/LOGO Xplorizz (1).png";
 import { AuthContext } from "../../Context/AuthContext";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");  
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext); // reading the context from the authcontext.jsx file
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,13 +27,20 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", { username, password });
-      const { token } = data;
+      const { data } = await axios.post("http://localhost:5000/api/auth/login", { username, password },
+      { headers: { "Content-Type": "application/json" } }
+      );
+      // yh flow gya authroutes.js me login route pe
+      //console.log("Data:",data); // check the data returned from the server
+      //console.log(data.token); // check the token returned from the server
+
+      const { token } = data;// destructuring the token from the data
       if (token) {
-        login(token);
-        localStorage.setItem("token", token);
-        const { role } = jwtDecode(token);
-        localStorage.setItem("role", role);
+        login(token); // auth contrext se refer  we call the login function
+        sessionStorage.setItem("token", token);// save the token in local storage
+         const { role, username } = jwtDecode(token);;// decode the token to get the role
+        sessionStorage.setItem("role", role);
+        sessionStorage.setItem("username", username);
         navigate(role === "admin" ? "/admin" : "/homepage");
       }
     } catch {
@@ -77,7 +85,7 @@ const LoginForm = () => {
         <button type="submit">Login</button>
         <div className="register-link">
           <p>
-            Don't have an account? <a href="#">Register</a>
+            Don't have an account? <a href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>Register</a>
           </p>
         </div>
       </form>

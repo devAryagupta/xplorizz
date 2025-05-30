@@ -11,12 +11,13 @@ interface BookingModalProps {
 const BookingModal: React.FC<BookingModalProps> = ({ guideId, guideName, onClose }) => {
   const [date, setDate] = useState<string>(new Date().toISOString().slice(0,10));
   const [hours, setHours] = useState<number>(1);
-  const [contact, setContact] = useState<string>("");
+  const [contactPhone, setContactPhone] = useState<string>("");
+  const [contactEmail, setContactEmail] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         alert("Please log in to continue.");
         return;
@@ -25,7 +26,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ guideId, guideName, onClose
 
       await axios.post(
         "http://localhost:5000/api/bookings",
-        { guideId, date, hours, contact },
+        { guideId, date, hours, contact: { phone: contactPhone, email: contactEmail } },
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,12 +65,20 @@ const BookingModal: React.FC<BookingModalProps> = ({ guideId, guideName, onClose
             onChange={e => setHours(Number(e.target.value))}
             required
           />
-          <label>Contact</label>
+          <label>Phone</label>
           <input
             type="text"
-            value={contact}
-            onChange={e => setContact(e.target.value)}
-            placeholder="Your phone or email"
+            value={contactPhone}
+            onChange={e => setContactPhone(e.target.value)}
+            placeholder="Your phone number"
+            required
+          />
+          <label>Email</label>
+          <input
+            type="email"
+            value={contactEmail}
+            onChange={e => setContactEmail(e.target.value)}
+            placeholder="Your email"
             required
           />
           <div className="modal-actions">

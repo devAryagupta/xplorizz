@@ -16,7 +16,7 @@ const GuideDashboard: React.FC = () => {
 
   const fetchBookings = async () => {
     setLoading(true);
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     try {
       const { data } = await axios.get(
         "http://localhost:5000/api/bookings/guide",
@@ -31,7 +31,7 @@ const GuideDashboard: React.FC = () => {
   };
 
   const updateStatus = async (id: string, status: "accepted" | "declined") => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     try {
       await axios.put(
         `http://localhost:5000/api/bookings/${id}/status`,

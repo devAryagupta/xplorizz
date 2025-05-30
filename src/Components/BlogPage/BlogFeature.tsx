@@ -2,12 +2,9 @@ import React from 'react';
 import UGCSubmission from './UGCSubmission';
 import LocationBasedFeed from './LocationBasedFeed';
 import SocialMediaFeed from './SocialMediaFeed';
-import AICuratedBlogs from './AICuratedBlogs';
-import GuestGuideColumns from './GuestGuideColumns';
-import CommunityThreads from './CommunityThreads';
-import CollabPosts from './CollabPosts';
-import RealTripBlogs from './RealTripBlogs';
-import CuratedTravelPacks from './CuratedTravelPacks';
+
+
+
 import VideoBlogIntegration from './VideoBlogIntegration';
 
 const BlogFeatures: React.FC = () => {
@@ -27,31 +24,7 @@ const BlogFeatures: React.FC = () => {
         <SocialMediaFeed />
       </section>
       <section>
-        <h3>4. AI Curated Blogs</h3>
-        <AICuratedBlogs />
-      </section>
-      <section>
-        <h3>5. Guest Guide Columns</h3>
-        <GuestGuideColumns />
-      </section>
-      <section>
-        <h3>6. Community Threads & Comments</h3>
-        <CommunityThreads />
-      </section>
-      <section>
-        <h3>7. Collaborative Blog Posts</h3>
-        <CollabPosts />
-      </section>
-      <section>
-        <h3>8. Real Trip Stories</h3>
-        <RealTripBlogs />
-      </section>
-      <section>
-        <h3>9. Curated Travel Packs</h3>
-        <CuratedTravelPacks />
-      </section>
-      <section>
-        <h3>10. Video Blog Integration</h3>
+        <h3>4. Video Blog Integration</h3>
         <VideoBlogIntegration />
       </section>
     </div>

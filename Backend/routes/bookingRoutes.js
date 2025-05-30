@@ -10,7 +10,7 @@ const router = express.Router();
 // POST /api/bookings — user creates a booking request
 router.post("/", auth, async (req, res) => {
   try {
-    const { guideId, date, hours } = req.body;
+    const { guideId, date, hours,contact } = req.body;
 
     // 1) fetch guide to get its rate
     const guide = await Guide.findById(guideId);
@@ -26,7 +26,7 @@ router.post("/", auth, async (req, res) => {
       guide: guideId,
       date: bookingDate,
       hours,
-      totalPrice
+      totalPrice,contact,
     });
 
     // 4) also push into the User.bookings subdoc
