@@ -3,7 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { AuthProvider } from "./Context/AuthContext";
 import App from "./App";
-import "./utils/axiosConfig";
+import "./Utils/axiosConfig";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
