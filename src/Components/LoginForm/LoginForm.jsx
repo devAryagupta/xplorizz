@@ -27,8 +27,9 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", { username, password },
-      { headers: { "Content-Type": "application/json" } }
+       const { data } = await axios.post("/api/auth/login", 
+        { username, password },
+        { headers: { "Content-Type": "application/json" } }
       );
       // yh flow gya authroutes.js me login route pe
       //console.log("Data:",data); // check the data returned from the server

@@ -63,4 +63,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// add a clear 405 for GETs
+router.get("/login", (req, res) => {
+  res
+    .status(405)
+    .json({ error: "Method GET not allowed. Use POST /api/auth/login" });
+});
+
 export default router;
