@@ -15,7 +15,7 @@ connectDB();
 
 const app = express();
 app.use(cors({
-  origin: "https://xplorizz.netlify.app/",
+  origin: "https://xplorizz.netlify.app",
   credentials: true,
   allowedHeaders: ["Content-Type", "x-auth-token", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
