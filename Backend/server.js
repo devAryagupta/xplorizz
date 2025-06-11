@@ -20,7 +20,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "x-auth-token", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
-app.options("*", cors());               // <- enable preflights
+app.options("/*", cors());               // <- enable preflights
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
