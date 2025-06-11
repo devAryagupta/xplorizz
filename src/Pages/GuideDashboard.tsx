@@ -19,7 +19,7 @@ const GuideDashboard: React.FC = () => {
     const token = sessionStorage.getItem("token");
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/bookings/guide",
+        "/api/bookings/guide",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setBookings(data);
@@ -34,7 +34,7 @@ const GuideDashboard: React.FC = () => {
     const token = sessionStorage.getItem("token");
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/status`,
+        `/api/bookings/${id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );

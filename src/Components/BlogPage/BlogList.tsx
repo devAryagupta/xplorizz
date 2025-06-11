@@ -21,7 +21,7 @@ const BlogList: React.FC<BlogListProps> = ({ categoryFilter }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/blogs')
+    axios.get('/api/blogs')
       .then(res => setBlogs(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));

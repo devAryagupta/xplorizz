@@ -26,7 +26,7 @@ const BookingsManagement: React.FC = () => {
       setLoading(true);
       try {
         const res = await axios.get<Booking[]>(
-          "http://localhost:5000/api/bookings/all",
+          "/api/bookings/all",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setBookings(res.data);

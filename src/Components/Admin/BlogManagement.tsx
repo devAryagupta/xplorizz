@@ -18,7 +18,7 @@ const BlogManagement: React.FC = () => {
     setLoading(true);
     try {
       const token = sessionStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/blogs", {
+      const res = await axios.get("/api/blogs", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(res.data);
@@ -34,7 +34,7 @@ const BlogManagement: React.FC = () => {
     try {
       const token = sessionStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/blogs/${blogId}/approve`,
+        `/api/blogs/${blogId}/approve`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

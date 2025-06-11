@@ -28,7 +28,7 @@ const BookingsPage: React.FC = () => {
         const token = sessionStorage.getItem("token");
         // hit your userRoutes GET /api/users/bookings
         const { data } = await axios.get(
-          "http://localhost:5000/api/users/bookings",
+          "/api/users/bookings",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setBookings(data);

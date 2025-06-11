@@ -15,7 +15,7 @@ const FeaturedCarousel: React.FC = () => {
     const [modalBlog, setModalBlog] = useState<FeaturedBlog | null>(null);
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/blogs?approved=true')
+      .get('/api/blogs?approved=true')
       .then(res => { const ugcOnly = res.data.filter((b: FeaturedBlog) => b.title.includes('UGC'));
         setFeaturedBlogs(ugcOnly);  // Filter to only include UGC blogs
       })

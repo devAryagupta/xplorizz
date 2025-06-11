@@ -37,7 +37,7 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
         const params: any = {};
         if (languageFilter) params.language = languageFilter;
         if (maxPrice) params.maxPrice = maxPrice;
-        const res = await axios.get("http://localhost:5000/api/guides", { params });
+        const res = await axios.get("/api/guides", { params });
         setGuides(res.data);
       } catch (err) {
         console.error("Error fetching guides:", err);

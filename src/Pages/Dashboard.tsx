@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
     const fetchProfile = async () => {
       try {
         const token = sessionStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
+        const res = await axios.get("/api/users/profile", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setProfile(res.data);

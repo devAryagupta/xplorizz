@@ -33,12 +33,12 @@ const DestinationForm: React.FC<DestinationFormProps> = ({ destination, onSucces
       const token = sessionStorage.getItem("token");
       if (destination) {
         // Update destination
-        await axios.put(`http://localhost:5000/api/destinations/${destination._id}`, formData, {
+        await axios.put(`/api/destinations/${destination._id}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
         // Create new destination
-        await axios.post("http://localhost:5000/api/destinations", formData, {
+        await axios.post("/api/destinations", formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }

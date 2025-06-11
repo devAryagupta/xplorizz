@@ -26,7 +26,7 @@ const UGCSubmission: React.FC = () => {
         return;
       }
       await axios.post(
-        "http://localhost:5000/api/blogs",
+        "/api/blogs",
         {
           title: `UGC: ${category} ${location}`,
           category,

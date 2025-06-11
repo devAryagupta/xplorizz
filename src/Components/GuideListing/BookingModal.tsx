@@ -25,7 +25,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ guideId, guideName, onClose
       console.log("🔑 booking token:", token);
 
       await axios.post(
-        "http://localhost:5000/api/bookings",
+        "/api/bookings",
         { guideId, date, hours, contact: { phone: contactPhone, email: contactEmail } },
         {
           headers: {

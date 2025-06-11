@@ -19,7 +19,7 @@ const GuideManagement: React.FC = () => {
     setLoading(true);
     try {
       const token = sessionStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/guides", {
+      const res = await axios.get("/api/guides", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setGuides(res.data);
@@ -32,7 +32,7 @@ const GuideManagement: React.FC = () => {
   const handleVerify = async (id: string) => {
     const token = sessionStorage.getItem("token");
     await axios.put(
-      `http://localhost:5000/api/guides/${id}/verify`,
+      `/api/guides/${id}/verify`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -43,7 +43,7 @@ const GuideManagement: React.FC = () => {
     if (!window.confirm("Are you sure you want to delete this guide?")) return;
     try {
       const token = sessionStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/guides/${id}`, {
+      await axios.delete(`/api/guides/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchGuides();
