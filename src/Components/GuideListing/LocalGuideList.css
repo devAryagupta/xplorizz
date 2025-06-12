@@ -11,15 +11,21 @@
   /* if no image yet, show blank box */
   background: #f0f4f8;
 }
+.local-guide-list {
+  padding: var(--gap);
+}
 
 /* tighten up the grid columns a bit */
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  gap: var(--gap);
 }
 .guide-filters {
     margin-bottom: 35px;
+    display:flex;
+    gap: var(--gap);
+    margin-bottom: var(--gap);
   }
 /* make card auto‐height, flex layout, and a sensible min-height */
 .card {
@@ -58,7 +64,7 @@
 /* content takes remaining space and pads nicely */
 .content {
   flex: 1;
-  padding: 0.75rem;
+  padding: var(--gap);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -75,20 +81,28 @@
 }
 .content h2 span {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--primary-color, #3182ce);
   font-weight: 300;
 }
 .content p {
   font-size: .9rem;
-  color: #333;
+  color: #555;
   margin: 0;
 }
 
 /* shrink the button a bit */
 .content .btn {
+  margin-top: auto;
+  background: var(--primary-color);
+  border-radius: var(--radius);
   padding: 0.5rem;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin-top: auto;
   align-self: stretch;
+  transition: background 0.2s ease;
+
+}
+.content .btn:hover {
+  background: var(--accent-color, #2b6cb0);
 }

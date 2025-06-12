@@ -5,8 +5,8 @@
   --accent-color: #FFCC00;       /* sunny yellow */
   --bg-light:    #F0F4F8;       
   --text-color:  #333333;
-  --radius:      6px;
-  --gap:         1rem;
+  --radius:      8px;
+  --gap:         16px;
 }
 
 
@@ -16,7 +16,19 @@
   box-sizing: border-box;
 }
 
-
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  padding: var(--gap);
+  margin-bottom: var(--gap);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 body {
   margin: 0;
   .rokkitt-unique> {
@@ -24,6 +36,9 @@ body {
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
+    background: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.5;
   }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,13 +68,13 @@ button {
   color: #fff;
   border: none;
   border-radius: var(--radius);
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem var(--gap);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
 }
 button:hover {
   background: var(--accent-color);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* Inputs & Textareas */
