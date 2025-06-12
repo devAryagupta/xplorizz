@@ -14,13 +14,17 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors({
-  origin: "https://xplorizz.netlify.app",
-  credentials: true,
-  allowedHeaders: ["Content-Type", "x-auth-token", "Authorization"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
-app.options("/*", cors());               // <- enable preflights
+
+// tighten CORS to your Netlify origin and catch every preflight
+const CLIENT = "https://xplorizz.netlify.app";
+app.use(
+  cors({
+    origin: CLIENT,
+    credentials: true
+  })
+);
+app.options("*", cors({ origin: CLIENT, credentials: true }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,4 +40,5 @@ if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
+
 export default app;
