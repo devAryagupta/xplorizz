@@ -15,15 +15,27 @@ connectDB();
 
 const app = express();
 
-// tighten CORS to your Netlify origin and catch every preflight
-const CLIENT = "https://xplorizz.netlify.app";
+// whitelist the two hosts you actually use
+const WHITELIST = [
+  "https://xplorizz.netlify.app",
+  "http://localhost:3000"
+];
+
+// for every request (including OPTIONS preflight)…
 app.use(
   cors({
-    origin: CLIENT,
-    credentials: true
+    origin: (origin, callback) => {
+      // allow non‐web (curl, mobile) or any whitelisted host
+      if (!origin || WHITELIST.includes(origin)) {
+        // reflect the request origin in the CORS header
+        return callback(null, origin || "*");
+      }
+      callback(new Error("Not allowed by CORS"), false);
+    },
+    credentials: true,
+    methods: ["GET","POST","PUT","DELETE","OPTIONS"]
   })
 );
-app.options("/*", cors({ origin: CLIENT, credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
