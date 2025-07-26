@@ -31,6 +31,7 @@ const BookingsPage: React.FC = () => {
           "/api/users/bookings",
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        
         setBookings(data);
       } catch (err) {
         console.error("Failed to load bookings", err);
@@ -66,6 +67,7 @@ const BookingsPage: React.FC = () => {
               {b.guide.contactInfo?.phone && (
                 <p>Contact: {b.guide.contactInfo.phone}</p>
               )}
+              
             </div>
           </div>
         ))}

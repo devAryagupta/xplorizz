@@ -3,8 +3,8 @@ import "./Testimonials.css";
 
 const Testimonials: React.FC = () => {
   const reviews = [
-    { name: "Alice", text: "An unforgettable experience!" },
-    { name: "Bob", text: "Loved every second of it!" }
+    { name: "Matthew Karsten", text: "Investment in travel is an investment in yourself." },
+    { name: "Ibn Battuta", text: "Traveling – it leaves you speechless, then turns you into a storyteller." }
   ];
 
   return (

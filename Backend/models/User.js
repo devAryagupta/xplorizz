@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   preferences: { type: Object },
   savedDestinations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Destination" }],
   bookings: [{
-    guide: { type: mongoose.Schema.Types.ObjectId, ref: "Guide" },
+    guide: { type: mongoose.Schema.Types.ObjectId, ref: "Booking" },
     bookingDate: { type: Date, default: Date.now },
     status: { type: String, default: "pending" }
   }]

@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import HomePage from "./Components/HomePage/HomePage";
 import BlogPage from "./Components/BlogPage/BlogPage";
 import "./App.css";
 import LocalGuideList from "./Components/GuideListing/LocalGuideList";
+import Header from "./Components/Navbar/Header";
 import GuideRoute from "./Utils/GuideRoute";
 import GuideDashboard from "./Pages/GuideDashboard";
 import AdminDashboard from "./Pages/AdminDashboard";
@@ -16,19 +17,33 @@ import RegisterForm from "./Components/RegisterationForm/RegisterForm.jsx";
 function App() {
   return (
     <Router>
+      <AppContent />
+    </Router>
+  );
+}
+function AppContent() {
+  const {pathname}=useLocation();
+  const hideHeader = ["/login","/register"].includes(pathname);
+  return (
+    <>
+      {!hideHeader && <Header />}
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} /> 
 
         {/* Public Routes */}
+        
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
+        
+          
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/guides" element={<LocalGuideList destination="India" />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/experiences" element={<ExperiencePage />} />
           <Route path="/bookings" element={<BookingsPage />} />
+          
 
         </Route>
 
@@ -45,7 +60,8 @@ function App() {
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </Router>
+    
+    </>
   );
 }
 

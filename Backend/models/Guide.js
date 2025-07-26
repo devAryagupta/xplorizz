@@ -5,7 +5,11 @@ const guideSchema = new mongoose.Schema({
   name: { type: String, required: true },
   expertise: { type: String, required: true },
   languages: [String],
-  destinationsCovered: [String],
+  destinationsCovered: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Destination",
+    required: true
+  }],
   availability: { type: Boolean, default: true },
   contactInfo: {
     email: String,

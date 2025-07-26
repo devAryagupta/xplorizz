@@ -23,12 +23,13 @@ interface LocalGuideListProps {
   destination: string;
 }
 
-const LocalGuideList: React.FC<LocalGuideListProps> = () => {
+const LocalGuideList: React.FC<LocalGuideListProps> = ({ destination }) => {
   const [guides, setGuides] = useState<Guide[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [languageFilter, setLanguageFilter] = useState<string>("");
   const [maxPrice, setMaxPrice] = useState<string>("");
   const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null);
+  const[destinationFilter, setDestinationFilter] = useState<string>("");
 
   useEffect(() => {
     const fetchGuides = async () => {
@@ -37,8 +38,11 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
         const params: any = {};
         if (languageFilter) params.language = languageFilter;
         if (maxPrice) params.maxPrice = maxPrice;
+        if (destinationFilter) params.destination = destinationFilter;
         const res = await axios.get("/api/guides", { params });
         setGuides(res.data);
+        // Debugging output
+        //console.log("Fetched guides:", res.data);
       } catch (err) {
         console.error("Error fetching guides:", err);
       } finally {
@@ -47,7 +51,7 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
     };
 
     fetchGuides();
-  }, [languageFilter, maxPrice]);
+  }, [languageFilter, maxPrice, destinationFilter]);
 
   return (
     <div className="local-guide-list p-4">
@@ -65,6 +69,13 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
           placeholder="Max Price per hour"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
+          className="border p-2 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Filter by destination"
+          value={destinationFilter}
+          onChange={(e) => setDestinationFilter(e.target.value)}
           className="border p-2 rounded"
         />
       </div>
@@ -93,6 +104,7 @@ const LocalGuideList: React.FC<LocalGuideListProps> = () => {
                 <p>Languages: {guide.languages.join(", ")}</p>
                 <p>Price: ₹{guide.pricePerHour}/hr</p>
                 <p>Rating: {guide.rating?.toFixed(1) || "N/A"}</p>
+                <p>Destination:{guide.destinationsCovered}</p>
                 <button
                   onClick={() => setSelectedGuide(guide)}
                   className="btn bg-blue-600 text-white rounded-lg py-2"
