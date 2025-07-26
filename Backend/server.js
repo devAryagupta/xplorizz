@@ -36,7 +36,17 @@ app.use(
     methods: ["GET","POST","PUT","DELETE","OPTIONS"]
   })
 );
-
+app.options("/*",
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || WHITELIST.includes(origin)) {
+        return callback(null, origin || "*");
+      }
+      callback(new Error("Not allowed by CORS"), false);
+    },
+    credentials: true
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
