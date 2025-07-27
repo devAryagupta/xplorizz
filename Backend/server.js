@@ -21,32 +21,21 @@ const WHITELIST = [
   "http://localhost:3000"
 ];
 
-// for every request (including OPTIONS preflight)…
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // allow non‐web (curl, mobile) or any whitelisted host
-      if (!origin || WHITELIST.includes(origin)) {
-        // reflect the request origin in the CORS header
-        return callback(null, origin || "*");
-      }
-      callback(new Error("Not allowed by CORS"), false);
-    },
-    credentials: true,
-    methods: ["GET","POST","PUT","DELETE","OPTIONS"]
-  })
-);
-app.options("/*",
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || WHITELIST.includes(origin)) {
-        return callback(null, origin || "*");
-      }
-      callback(new Error("Not allowed by CORS"), false);
-    },
-    credentials: true
-  })
-);
+// configure CORS options to allow whitelisted origins and reflect origin for credentialed requests
+const corsOptions = {
+  origin: (origin, callback) => {
+    // allow requests without origin (e.g., curl or server-to-server)
+    if (!origin || WHITELIST.includes(origin)) {
+      // callback with true to reflect the request origin
+      return callback(null, true);
+    }
+    callback(new Error("Not allowed by CORS"), false);
+  },
+  credentials: true
+};
+// apply CORS middleware and enable preflight across all routes
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
