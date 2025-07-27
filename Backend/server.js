@@ -20,29 +20,28 @@ const WHITELIST = [
   "http://localhost:3000"
 ];
 
-// 1) CORS–enable all /api/** routes and preflights
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && WHITELIST.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-  }
-  // required headers and methods for preflight
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, X-Requested-With"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS"
-  );
-  if (req.method === "OPTIONS") {
-    // ––––––– immediately return for preflight
-    return res.sendStatus(204);
-  }
-  next();
-});
+// Set up cors options:
+const corsOptions = {
+  origin: (origin, callback) => {
+    // If there is no origin (e.g. a curl call) or it's in the whitelist
+    if (!origin || WHITELIST.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+};
 
+// Use the cors middleware
+app.use(cors(corsOptions));
+
+// (Optional) Also handle OPTIONS requests explicitly
+app.options("*", cors(corsOptions));
+
+// Then proceed with JSON parsing and mounting routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
