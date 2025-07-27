@@ -7,7 +7,10 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "server.js" },
-    { "src": "/(.*)", "dest": "server.js" }
+    {
+      "src": "/api/(.*)",
+      "methods": ["OPTIONS","GET","HEAD","POST","PUT","PATCH","DELETE"],
+      "dest": "server.js"
+    }
   ]
 }
