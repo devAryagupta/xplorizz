@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/User.js";
+import Booking from "../models/Booking.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
@@ -34,9 +35,11 @@ router.put("/profile", auth, async (req, res) => {
 // Get user's bookings history
 router.get("/bookings", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).populate("bookings.guide");
-    if (!user) return res.status(404).json({ msg: "User not found" });
-    res.json(user.bookings);
+    const bookings = await Booking
+      .find({ user: req.user.userId })
+      .populate("guide", "name expertise contactInfo profilePhoto")
+      .sort({ date: -1 });
+    res.json(bookings);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

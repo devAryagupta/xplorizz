@@ -4,16 +4,15 @@ import "./BookingsPage.css";
 
 interface Booking {
   _id: string;
-  bookingDate?: string;         // from User.bookings
-  date?: string;                // if you switch to Booking model
-  hours?: number;
-  totalPrice?: number;
+  date: string; // comes from Booking.date
+  hours: number;
+  totalPrice: number;
   status: string;
   guide: {
     _id: string;
     name: string;
     expertise: string;
-    contactInfo?: { email: string; phone: string };
+    contactInfo?: { email?: string; phone?: string };
     profilePhoto?: string;
   };
 }
@@ -31,7 +30,7 @@ const BookingsPage: React.FC = () => {
           "/api/users/bookings",
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        
+
         setBookings(data);
       } catch (err) {
         console.error("Failed to load bookings", err);
@@ -67,7 +66,6 @@ const BookingsPage: React.FC = () => {
               {b.guide.contactInfo?.phone && (
                 <p>Contact: {b.guide.contactInfo.phone}</p>
               )}
-              
             </div>
           </div>
         ))}
