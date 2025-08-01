@@ -10,35 +10,28 @@ const router = express.Router();
 // POST /api/bookings — user creates a booking request
 router.post("/", auth, async (req, res) => {
   try {
-    const { guideId, date, hours,contact } = req.body;
-
-    // 1) fetch guide to get its rate
+    const { guideId, date, hours, contact } = req.body;
     const guide = await Guide.findById(guideId);
     if (!guide) return res.status(404).json({ msg: "Guide not found" });
 
     const bookingDate = new Date(date);
-    // 2) compute total price
     const totalPrice = guide.pricePerHour * Number(hours);
 
-    // 3) create the booking with a valid totalPrice
+    // 3) create the single Booking doc
     const booking = await Booking.create({
-      user: req.user.userId,
-      guide: guideId,
-      date: bookingDate,
+      user:       req.user.userId,
+      guide:      guideId,
+      date:       bookingDate,
       hours,
-      totalPrice,contact,
+      totalPrice,
+      contact
     });
 
-    // 4) also push into the User.bookings subdoc
-    await User.findByIdAndUpdate(req.user.userId, {
-      $push: {
-        bookings: {
-          guide: guideId,
-          bookingDate,
-          status: booking.status
-        }
-      }
-    });
+    // 4) push that booking._id into the User.bookings and Guide.bookings arrays
+    await Promise.all([
+      User.findByIdAndUpdate(req.user.userId,  { $push: { bookings: booking._id } }),
+      Guide.findByIdAndUpdate(guideId,          { $push: { bookings: booking._id } })
+    ]);
 
     res.status(201).json(booking);
   } catch (err) {

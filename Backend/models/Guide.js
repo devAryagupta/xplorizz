@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const guideSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, unique: true },
   name: { type: String, required: true },
@@ -18,6 +19,10 @@ const guideSchema = new mongoose.Schema({
   pricePerHour: { type: Number, required: true },
   rating: { type: Number, default: 0 },
   profilePhoto: { type: String, default: "" },
+  bookings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Booking"
+  }],
 });
 
 export default mongoose.model("Guide", guideSchema);
